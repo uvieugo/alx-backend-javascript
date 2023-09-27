@@ -1,27 +1,7 @@
-function uploadPhoto() {
-  return Promise.resolve({
-    status: 200,
-    body: 'photo-profile-1',
+import { uploadPhoto, createUser } from './utils';
+
+export default function handleProfileSignup() {
+  Promise.all([uploadPhoto(), createUser()]).then(([result1, result2]) => {
+    console.log(result1.body, result2.firstName, result2.lastName);
   });
 }
-
-
-
-function createUser() {
-  return Promise.resolve({
-    firstName: 'Guillaume',
-    lastName: 'Salva',
-  });
-}
-
-
-function handleProfileSignup() {
-  uploadPhoto()
-    .then(result => {
-      console.log(result.body)
-      createUser()
-        .then(result => console.log(result.firstName, result.lastName))
-    })
-}
-
-handleProfileSignup();
